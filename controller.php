@@ -1,7 +1,7 @@
 <?php   
 /*
 *
-* Copyright (c) 2009 Marc Geldon <marc.geldon@scalait.de>, SCALA IT (www.scalait.de)
+* Copyright (c) 2009-2012 Marc Geldon <mgeldon@mindnet-systemhaus.com>, MindNet Systemhaus GmbH (www.mindnet-systemhaus.com)
 *
 * Permission is hereby granted, free of charge, to any person obtaining a 
 * copy of this software and associated documentation files (the 
@@ -22,34 +22,33 @@
 * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
 * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
 
-* @author Marc Geldon <marc.geldon@scalait.de
-* @copyright Copyright (c) 2009 Marc Geldon, SCALA IT (http://www.scalait.de)
+* @author Marc Geldon <mgeldon@mindnet-systemhaus.com>
+* @copyright Copyright (c) 2009-2012 Marc Geldon <mgeldon@mindnet-systemhaus.com>, MindNet Systemhaus GmbH (www.mindnet-systemhaus.com)
 * @license MIT License
 */
 
 defined('C5_EXECUTE') or die(_("Access Denied."));
 
 class SiBrowserUpdatePackage extends Package {
-
 	protected $pkgHandle = 'si_browser_update';
 	protected $appVersionRequired = '5.3.1';
-	protected $pkgVersion = '1.0'; 
+	protected $pkgVersion = '1.1'; 
 	
 	public function getPackageName() {
-		return t("SCALA IT Browser Update Notification"); 
+		return t("MindNet Browser Update Notification"); 
 	}	
 	
 	public function getPackageDescription() {
 		return t("Inform your visitors unobtrusively to switch to a newer browser. Based on the Browser-Update.org initiative.");
 	}
 	
-public function on_start() {   
-  Events::extend( 
-  'on_before_render', 
-  'SiBrowserUpdate', 
-  'addPageHeader', 
-  'packages/'.$this->pkgHandle.'/models/si_browser_update.php'); 
-} 
+	public function on_start() {
+		Events::extend( 
+  			'on_before_render', 
+			'SiBrowserUpdate', 
+			'addPageHeader', 
+			'packages/' . $this->pkgHandle . '/models/si_browser_update.php'); 
+	}
 	
 	public function install() {
 		$pkg = parent::install();
@@ -59,4 +58,3 @@ public function on_start() {
 		$pkg = parent::uninstall();
 	}
 }
-?>
